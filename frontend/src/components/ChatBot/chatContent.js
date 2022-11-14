@@ -87,7 +87,6 @@ export default class ChatContent extends Component {
     this.scrollToBottom();
   }
   onStateChange = (e) => {
-    console.log(e.target.value);
     this.setState({ msg: e.target.value });
   };
   onHandleClick = (e) => {
@@ -103,13 +102,13 @@ export default class ChatContent extends Component {
     recognition.lang = "en-US";
     recognition.start();
     var self = this;
-    recognition.onresult = function(e) {
+    recognition.onresult = function (e) {
       var speak = e.results[0][0].transcript;
       document.getElementById("speech").value = speak;
       recognition.stop();
       self.setState({ msg: speak });
     };
-    recognition.onerror = function(e) {
+    recognition.onerror = function (e) {
       recognition.stop();
     };
   };
