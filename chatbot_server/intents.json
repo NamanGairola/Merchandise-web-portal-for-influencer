@@ -1,11 +1,26 @@
 {
   "intents": [
+    {
+        "tag": "name",
+        "patterns": [
+            "What is your name?",
+            "What are you known as?",
+            "Who are you?",
+            "What's your name?"
+        ],
+        "responses": [
+            "I am Merchy",
+            "My name is Merchy",
+            "I go by Merchy"
+        ]
+    },
       {
           "tag": "greeting",
           "patterns": [
               "Hi",
               "Hey",
-              "Hello"
+              "Hello",
+              "Is anyone there?"
           ],
           "responses": [
               "Hey :-) ",
@@ -41,18 +56,23 @@
           "tag": "funny",
           "patterns": [
               "Tell me a joke!",
-              "Tell me something funny!"
+              "Tell me something funny!",
+              "can you tell me a joke?",
+              "Can you tell me something funny?",
+              "Can you be funny?"
           ],
           "responses": [
               "My friend was explaining electricity to me, but I was like, Watt?",
               "I failed math so many times at school, I cant even count.",
-              "A book fell on my head the other day. I only have my shelf to blame though."
+              "A book fell on my head the other day. I only have my shelf to blame though.",
+              "Why was 6 afraid of 7? because 7 ate(8) 9."
           ]
       },
       {
           "tag": "login_credentials",
           "patterns": [
               "New User-id and password",
+              "How do I register myself?",
               "create new account",
               "how to create new account"
           ],
@@ -80,10 +100,12 @@
           "patterns": [
               "Invalid Username and Password is displayed",
               "shows invalid credentials",
-              "can not log in through credentials"
+              "can not log in through credentials",
+              "showing invalid credentials"
           ],
           "responses": [
-              "Recheck the login credentials. Confirm whether someone else has logged in with the same credentials ."
+              "Recheck the login credentials. Confirm whether someone else has logged in with the same credentials .",
+              "Please check you lgin credentials."
           ]
       },
       {
@@ -112,6 +134,7 @@
       {
           "tag": "return",
           "patterns": [
+              "What are your return policies?",
               "return policy",
               "return days"
           ],
@@ -122,6 +145,8 @@
       {
           "tag": "shipping ",
           "patterns": [
+              "What are the delivery charges?",
+              "What are the additional charges for delivery?",
               "shipping cost",
               "delivery cost"
           ],
@@ -132,6 +157,8 @@
       {
           "tag": "order",
           "patterns": [
+              "How do I track may order?",
+              "Where is my order?",
               "how to track order",
               "order details"
           ],
