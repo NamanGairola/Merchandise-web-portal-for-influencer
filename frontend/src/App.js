@@ -8,7 +8,7 @@ function App() {
     <BrowserRouter>
       <div>
         <header>
-          <Link to="/">amazona</Link>
+          <Link to="/">Soul-Merch</Link>
           <Link to="/contact">Contact Us</Link>
         </header>
         <main>
