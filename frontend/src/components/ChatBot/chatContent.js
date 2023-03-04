@@ -92,6 +92,7 @@ export default class ChatContent extends Component {
   onHandleClick = (e) => {
     this.addToChat();
   };
+
   onVoiceClick = (e) => {
     const SpeechRecognition =
       window.SpeechRecognition || window.webkitSpeechRecognition;
