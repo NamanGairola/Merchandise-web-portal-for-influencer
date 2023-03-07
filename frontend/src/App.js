@@ -1,8 +1,8 @@
-import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
-import ContactUs from "./components/ContactUs";
-import HomeScreen from "./components/HomeScreen";
-import ProductScreen from "./components/ProductScreen";
-import ChatBotScreen from "./components/ChatBot/ChatBotScreen";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import ContactUs from "./screens/ContactUs";
+import HomeScreen from "./screens/HomeScreen";
+import ProductScreen from "./screens/ProductScreen";
+import ChatBotScreen from "./ChatBot/ChatBotScreen";
 import NavBar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import { LinkContainer } from "react-router-bootstrap";
@@ -20,7 +20,7 @@ function App() {
           </NavBar>
         </header>
         <main>
-          <Container>
+          <Container className="mt-3">
             <Routes>
               <Route path="/product/:slug" element={<ProductScreen />} />
               <Route path="/" element={<HomeScreen />} />
