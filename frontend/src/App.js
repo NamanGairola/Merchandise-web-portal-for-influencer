@@ -33,6 +33,8 @@ import ProductEditScreen from "./screens/ProductEditScreen";
 import OrderListScreen from "./screens/OrderListScreen";
 import UserListScreen from "./screens/UserListScreen";
 import UserEditScreen from "./screens/UserEditScreen";
+import ContactUsScreen from "./screens/ContactUsScreen";
+import ChatBotScreen from "./screens/ChatBotScreen";
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -101,6 +103,9 @@ function App() {
                       </LinkContainer>
                       <LinkContainer to="/orderhistory">
                         <NavDropdown.Item>Order History</NavDropdown.Item>
+                      </LinkContainer>
+                      <LinkContainer to="/ContactUs">
+                        <NavDropdown.Item>ContactUs</NavDropdown.Item>
                       </LinkContainer>
                       <NavDropdown.Divider />
                       <Link
@@ -171,6 +176,8 @@ function App() {
               <Route path="/signin" element={<SigninScreen />} />
               <Route path="/signup" element={<SignupScreen />} />
               <Route path="/placeorder" element={<PlaceOrderScreen />} />
+              <Route path="/ContactUs" element={<ContactUsScreen />} />
+              <Route path="/chatbot" element={<ChatBotScreen />} />
               <Route
                 path="/order/:id"
                 element={
@@ -243,6 +250,7 @@ function App() {
                 }
               ></Route>
               <Route path="/" element={<HomeScreen />} />
+
               <Route
                 path="/admin/product/:id"
                 element={

@@ -1,10 +1,10 @@
 import React, { Component, createRef } from "react";
-import "./chatContent.css";
+
 import Avatar from "./Avatar";
 import ChatItem from "./ChatItem";
 
 const postData = async (query) => {
-  const res = await fetch("/home", {
+  const res = await fetch("http://127.0.0.1:5000/home", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
