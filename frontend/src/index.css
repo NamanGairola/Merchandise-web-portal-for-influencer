@@ -5,6 +5,12 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: rgb(248, 248, 251);
+  background: radial-gradient(
+    circle,
+    rgba(248, 248, 251, 1) 0%,
+    rgba(218, 241, 255, 1) 100%
+  );
 }
 
 code {
@@ -19,8 +25,8 @@ main {
 }
 .btn-primary,
 .btn-outline-primary {
-  background-color: #f0c040;
-  color: #000000;
+  background-color: black;
+  color: white;
 }
 .products {
   display: flex;
@@ -28,7 +34,7 @@ main {
   justify-content: center;
 }
 .rating span {
-  color: #ffc000;
+  color: #ffd95a;
 }
 
 .product {
@@ -63,16 +69,28 @@ main {
   color: #f08000;
 }
 
-/* sidebar */
+/* sidebar - navbar */
+
+.navbar {
+  background-color: #05bfdb;
+}
 .navbar-brand {
   font-weight: bold;
+}
+
+.nav-link {
+  color: black;
+}
+
+.nav-btn {
+  margin-right: 1%;
 }
 .side-navbar {
   width: 240px;
   height: 100%;
   position: absolute;
   left: -300px;
-  background-color: #100901;
+  background-color: #91d8e4;
   transition: 0.5s;
 }
 
