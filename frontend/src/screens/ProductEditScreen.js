@@ -60,7 +60,7 @@ export default function ProductEditScreen() {
   const [category, setCategory] = useState("");
   const [images, setImages] = useState([]);
   const [countInStock, setCountInStock] = useState("");
-  const [brand, setBrand] = useState("");
+  const [influencer, setinfluencer] = useState("");
   const [description, setDescription] = useState("");
 
   useEffect(() => {
@@ -75,7 +75,7 @@ export default function ProductEditScreen() {
         setImages(data.images);
         setCategory(data.category);
         setCountInStock(data.countInStock);
-        setBrand(data.brand);
+        setinfluencer(data.influencer);
         setDescription(data.description);
         dispatch({ type: "FETCH_SUCCESS" });
       } catch (err) {
@@ -101,7 +101,7 @@ export default function ProductEditScreen() {
           image,
           images,
           category,
-          brand,
+          influencer,
           countInStock,
           description,
         },
@@ -231,11 +231,11 @@ export default function ProductEditScreen() {
             />
             {loadingUpload && <LoadingBox></LoadingBox>}
           </Form.Group>
-          <Form.Group className="mb-3" controlId="brand">
-            <Form.Label>Brand</Form.Label>
+          <Form.Group className="mb-3" controlId="influencer">
+            <Form.Label>influencer</Form.Label>
             <Form.Control
-              value={brand}
-              onChange={(e) => setBrand(e.target.value)}
+              value={influencer}
+              onChange={(e) => setinfluencer(e.target.value)}
               required
             />
           </Form.Group>
