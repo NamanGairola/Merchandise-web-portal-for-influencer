@@ -135,6 +135,7 @@ productRouter.get(
     const pageSize = query.pageSize || PAGE_SIZE;
     const page = query.page || 1;
     const category = query.category || "";
+    const influencer = query.influencer || "";
     const price = query.price || "";
     const rating = query.rating || "";
     const order = query.order || "";
@@ -149,6 +150,8 @@ productRouter.get(
             },
           }
         : {};
+    const influencerFilter =
+      influencer && influencer !== "all" ? { influencer } : {};
     const categoryFilter = category && category !== "all" ? { category } : {};
     const ratingFilter =
       rating && rating !== "all"
@@ -184,6 +187,7 @@ productRouter.get(
     const products = await Product.find({
       ...queryFilter,
       ...categoryFilter,
+      ...influencerFilter,
       ...priceFilter,
       ...ratingFilter,
     })
@@ -194,6 +198,7 @@ productRouter.get(
     const countProducts = await Product.countDocuments({
       ...queryFilter,
       ...categoryFilter,
+      ...influencerFilter,
       ...priceFilter,
       ...ratingFilter,
     });
@@ -210,6 +215,14 @@ productRouter.get(
   "/categories",
   expressAsyncHandler(async (req, res) => {
     const categories = await Product.find().distinct("category");
+    res.send(categories);
+  })
+);
+
+productRouter.get(
+  "/influencers",
+  expressAsyncHandler(async (req, res) => {
+    const categories = await Product.find().distinct("influencer");
     res.send(categories);
   })
 );

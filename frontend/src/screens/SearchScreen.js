@@ -75,12 +75,17 @@ export default function SearchScreen() {
   const navigate = useNavigate();
   const { search } = useLocation();
   const sp = new URLSearchParams(search); // /search?category=Shirts
+
   const category = sp.get("category") || "all";
+  const influencer = sp.get("influencer") || "all";
   const query = sp.get("query") || "all";
   const price = sp.get("price") || "all";
   const rating = sp.get("rating") || "all";
   const order = sp.get("order") || "newest";
   const page = sp.get("page") || 1;
+
+  console.log(category);
+  console.log(influencer);
 
   const [{ loading, error, products, pages, countProducts }, dispatch] =
     useReducer(reducer, {
@@ -92,7 +97,7 @@ export default function SearchScreen() {
     const fetchData = async () => {
       try {
         const { data } = await axios.get(
-          `/api/products/search?page=${page}&query=${query}&category=${category}&price=${price}&rating=${rating}&order=${order}`
+          `/api/products/search?page=${page}&query=${query}&influencer=${influencer}&category=${category}&price=${price}&rating=${rating}&order=${order}`
         );
         dispatch({ type: "FETCH_SUCCESS", payload: data });
       } catch (err) {
@@ -103,9 +108,11 @@ export default function SearchScreen() {
       }
     };
     fetchData();
-  }, [category, error, order, page, price, query, rating]);
+  }, [category, influencer, error, order, page, price, query, rating]);
 
   const [categories, setCategories] = useState([]);
+  const [influencers, setInfluencers] = useState([]);
+
   useEffect(() => {
     const fetchCategories = async () => {
       try {
@@ -118,16 +125,29 @@ export default function SearchScreen() {
     fetchCategories();
   }, [dispatch]);
 
+  useEffect(() => {
+    const fetchInfluencers = async () => {
+      try {
+        const { data } = await axios.get(`/api/products/influencers`);
+        setInfluencers(data);
+      } catch (err) {
+        toast.error(getError(err));
+      }
+    };
+    fetchInfluencers();
+  }, [dispatch]);
+
   const getFilterUrl = (filter, skipPathname) => {
     const filterPage = filter.page || page;
     const filterCategory = filter.category || category;
+    const filterInfluencers = filter.influencer || influencer;
     const filterQuery = filter.query || query;
     const filterRating = filter.rating || rating;
     const filterPrice = filter.price || price;
     const sortOrder = filter.order || order;
     return `${
       skipPathname ? "" : "/search?"
-    }category=${filterCategory}&query=${filterQuery}&price=${filterPrice}&rating=${filterRating}&order=${sortOrder}&page=${filterPage}`;
+    }category=${filterCategory}&influencer=${filterInfluencers}&query=${filterQuery}&price=${filterPrice}&rating=${filterRating}&order=${sortOrder}&page=${filterPage}`;
   };
   return (
     <div>
@@ -136,6 +156,29 @@ export default function SearchScreen() {
       </Helmet>
       <Row>
         <Col md={3}>
+          <h3>Influencers</h3>
+          <div>
+            <ul>
+              <li>
+                <Link
+                  className={"all" === influencer ? "text-bold" : ""}
+                  to={getFilterUrl({ influencer: "all" })}
+                >
+                  Any
+                </Link>
+              </li>
+              {influencers.map((c) => (
+                <li key={c}>
+                  <Link
+                    className={c === influencer ? "text-bold" : ""}
+                    to={getFilterUrl({ influencer: c })}
+                  >
+                    {c}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
           <h3>Department</h3>
           <div>
             <ul>
@@ -219,6 +262,7 @@ export default function SearchScreen() {
                     {countProducts === 0 ? "No" : countProducts} Results
                     {query !== "all" && " : " + query}
                     {category !== "all" && " : " + category}
+                    {influencer !== "all" && " : " + influencer}
                     {price !== "all" && " : Price " + price}
                     {rating !== "all" && " : Rating " + rating + " & up"}
                     {query !== "all" ||

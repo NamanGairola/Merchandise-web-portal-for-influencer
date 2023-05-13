@@ -48,6 +48,7 @@ function App() {
   };
   const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
   const [categories, setCategories] = useState([]);
+  const [influencers, setInfluencer] = useState([]);
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -58,7 +59,19 @@ function App() {
         toast.error(getError(err));
       }
     };
+
+    const fetchInfluencers = async () => {
+      try {
+        const { data } = await axios.get(`/api/products/influencers`);
+        console.log(data);
+        setInfluencer(data);
+      } catch (err) {
+        toast.error(getError(err));
+      }
+    };
+
     fetchCategories();
+    fetchInfluencers();
   }, []);
   return (
     <BrowserRouter>
@@ -164,6 +177,22 @@ function App() {
                   onClick={() => setSidebarIsOpen(false)}
                 >
                   <Nav.Link>{category}</Nav.Link>
+                </LinkContainer>
+              </Nav.Item>
+            ))}
+            <Nav.Item>
+              <strong>Influencer</strong>
+            </Nav.Item>
+            {influencers.map((influencer) => (
+              <Nav.Item key={influencer}>
+                <LinkContainer
+                  to={{
+                    pathname: "/search",
+                    search: `?influencer=${influencer}`,
+                  }}
+                  onClick={() => setSidebarIsOpen(false)}
+                >
+                  <Nav.Link>{influencer}</Nav.Link>
                 </LinkContainer>
               </Nav.Item>
             ))}
