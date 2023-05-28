@@ -11,7 +11,6 @@ import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
 import Button from "react-bootstrap/Button";
 import Product from "../components/Product";
-import LinkContainer from "react-router-bootstrap/LinkContainer";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -75,6 +74,8 @@ export default function SearchScreen() {
   const navigate = useNavigate();
   const { search } = useLocation();
   const sp = new URLSearchParams(search); // /search?category=Shirts
+
+  console.log(search);
 
   const category = sp.get("category") || "all";
   const influencer = sp.get("influencer") || "all";
@@ -307,13 +308,10 @@ export default function SearchScreen() {
 
               <div>
                 {[...Array(pages).keys()].map((x) => (
-                  <LinkContainer
+                  <Link
                     key={x + 1}
                     className="mx-1"
-                    to={{
-                      pathname: "/search",
-                      seacrh: getFilterUrl({ page: x + 1 }, true),
-                    }}
+                    to={getFilterUrl({ page: x + 1 })}
                   >
                     <Button
                       className={Number(page) === x + 1 ? "text-bold" : ""}
@@ -321,7 +319,7 @@ export default function SearchScreen() {
                     >
                       {x + 1}
                     </Button>
-                  </LinkContainer>
+                  </Link>
                 ))}
               </div>
             </>
